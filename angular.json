@@ -28,9 +28,16 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/scss/style.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery/jquery-2.2.4.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/plugins.js",
+              "src/assets/js/active.js"
+            ]
           },
           "configurations": {
             "production": {

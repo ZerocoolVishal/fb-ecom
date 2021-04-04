@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -9,8 +10,9 @@ import { MainComponent } from './main.component';
     exports: [
         MainComponent
     ],
-    imports: [
-        CommonModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule
+  ]
 })
 export class MainModule { }
