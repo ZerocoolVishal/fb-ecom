@@ -18,7 +18,12 @@
   <!-- Button Group -->
   <div class="amado-btn-group mt-30 mb-100">
     <a [routerLink]="'/shop'" class="btn amado-btn mb-15">%Discount%</a>
-    <a [routerLink]="'/shop'" class="btn amado-btn active">New this week</a>
+    <ng-container *ngIf="auth.user$ | async; else login">
+      <button (click)="auth.signOut()" class="btn amado-btn active">Logout</button>
+    </ng-container>
+    <ng-template #login>
+      <button (click)="auth.googleSignIn()" class="btn amado-btn active">Login</button>
+    </ng-template>
   </div>
   <!-- Cart Menu -->
   <div class="cart-fav-search mb-100">
