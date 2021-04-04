@@ -50,9 +50,9 @@
               <!-- Product Meta Data -->
               <div class="product-meta-data">
                 <div class="line"></div>
-                <p class="product-price">$180</p>
-                <a [routerLink]="['/product-details', 1]">
-                  <h6>Modern Chair</h6>
+                <p class="product-price">₹{{product.price}}</p>
+                <a [routerLink]="['/product-details', product.id]">
+                  <h6>{{product.name}}</h6>
                 </a>
               </div>
               <!-- Ratings & Cart -->
