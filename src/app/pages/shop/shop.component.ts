@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../../models/product';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-shop',
@@ -8,33 +10,21 @@ import {Product} from '../../models/product';
 })
 export class ShopComponent implements OnInit {
 
-  products: Product[] = [
-    {
-      id: '123456',
-      name: 'White Modern Chair',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?',
-      price: 2300,
-      quantity: 10
-    },
-    {
-      id: '2345',
-      name: 'White Modern Chair',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?',
-      price: 2300,
-      quantity: 10
-    },
-    {
-      id: '12345',
-      name: 'White Modern Chair',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?',
-      price: 2300,
-      quantity: 10
-    }
-  ];
+  products: Product[] = [];
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore,
+    private productService: ProductService
+  ) {
+    this.getProducts();
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
   }
 
 }
