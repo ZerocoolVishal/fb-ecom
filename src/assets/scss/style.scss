@@ -29,7 +29,7 @@
 @import '../css/owl.carousel.css';
 @import '../css/animate.css';
 @import '../css/magnific-popup.css';
-//@import '../css/jquery-ui.min.css';
+@import '../css/jquery-ui.min.css';
 @import '../css/nice-select.css';
 @import '../css/font-awesome.min.css';
 
@@ -1672,5 +1672,22 @@ img {
         }
     }
 }
+
+.ng-content-area {
+  @include flex(0 0 calc(100% - 320px));
+  width: calc(100% - 320px);
+  max-width: calc(100% - 320px);
+  @media #{$breakpoint-md} {
+    @include flex(0 0 calc(100% - 280px));
+    width: calc(100% - 280px);
+    max-width: calc(100% - 280px);
+  }
+  @media #{$breakpoint-xs} {
+    @include flex(0 0 100%);
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 
 /* ##### The End ##### */
