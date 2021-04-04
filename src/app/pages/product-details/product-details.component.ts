@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from '../../models/product';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product.service';
+import {AuthService} from '../../services/auth.service';
+import {User} from '../../models/user';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-product-details',
@@ -13,14 +16,18 @@ export class ProductDetailsComponent implements OnInit {
   id: string;
   product: Product;
   quantity = 1;
+  user: User;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AuthService
   ) {
+    this.auth.user$.subscribe(user => {
+      this.user = user;
+    });
     this.activatedRoute.params.subscribe((params) => {
       this.id = params.id;
-      // console.log('id', this.id);
       if (this.id) {
         this.getProduct();
       }
@@ -35,6 +42,10 @@ export class ProductDetailsComponent implements OnInit {
         this.product = resp.data();
       }
     });
+  }
+
+  addToCart(): void {
+
   }
 
 }
