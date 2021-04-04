@@ -693,25 +693,6 @@ img {
     .cart-table-area {
         position: relative;
         z-index: 1;
-        @include flex(0 0 calc(95% - 320px));
-        width: calc(95% - 320px);
-        max-width: calc(95% - 320px);
-        @media #{$breakpoint-lg} {
-            @include flex(0 0 calc(100% - 320px));
-            width: calc(100% - 320px);
-            max-width: calc(100% - 320px);
-        }
-        @media #{$breakpoint-md} {
-            @include flex(0 0 calc(100% - 280px));
-            width: calc(100% - 280px);
-            max-width: calc(100% - 280px);
-        }
-        @media #{$breakpoint-xs} {
-            @include flex(0 0 100%);
-            width: 100%;
-            max-width: 100%;
-            padding-top: 0;
-        }
         .cart-title {
             h2 {
                 font-size: 30px;
@@ -1674,9 +1655,14 @@ img {
 }
 
 .ng-content-area {
-  @include flex(0 0 calc(100% - 320px));
-  width: calc(100% - 320px);
-  max-width: calc(100% - 320px);
+  @include flex(0 0 calc(95% - 320px));
+  width: calc(95% - 320px);
+  max-width: calc(95% - 320px);
+  @media #{$breakpoint-lg} {
+    @include flex(0 0 calc(100% - 320px));
+    width: calc(100% - 320px);
+    max-width: calc(100% - 320px);
+  }
   @media #{$breakpoint-md} {
     @include flex(0 0 calc(100% - 280px));
     width: calc(100% - 280px);
@@ -1686,6 +1672,7 @@ img {
     @include flex(0 0 100%);
     width: 100%;
     max-width: 100%;
+    padding-top: 0;
   }
 }
 
