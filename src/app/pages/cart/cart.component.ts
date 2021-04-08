@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {User} from '../../models/user';
 import {AuthService} from '../../services/auth.service';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 
 @Component({
@@ -25,7 +24,6 @@ export class CartComponent implements OnInit {
     this.auth.user$.subscribe(user => {
       this.user = user;
       if (this.user) {
-        this.productService.initCart(this.user.id);
         this.getCart();
       }
     });
@@ -47,12 +45,11 @@ export class CartComponent implements OnInit {
   }
 
   addQuantity(id): void {
-    console.log('addQuantity');
-    this.productService.addToCart(id, 1, this.user.id);
+    this.productService.addToCart(id, 1);
   }
 
   removeQuantity(id): void {
-    console.log('removeQuantity');
-    this.productService.removeFrom(id, 1, this.user.id);
+    this.productService.removeFrom(id, 1);
   }
+
 }

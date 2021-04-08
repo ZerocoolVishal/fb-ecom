@@ -47,7 +47,7 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(): void {
     if (this.user) {
-      this.productService.addToCart(this.id, this.quantity, this.user.id);
+      this.productService.addToCart(this.id, this.quantity);
       this.toastr.success('Product to cart');
     }
   }
