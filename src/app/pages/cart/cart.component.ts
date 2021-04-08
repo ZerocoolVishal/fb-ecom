@@ -52,4 +52,8 @@ export class CartComponent implements OnInit {
     this.productService.removeFrom(id, 1);
   }
 
+  checkout(): void {
+    this.productService.placeOrder();
+  }
+
 }
