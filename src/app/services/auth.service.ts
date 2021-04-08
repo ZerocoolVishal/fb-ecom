@@ -40,7 +40,7 @@ export class AuthService {
 
   async signOut(): Promise<any> {
     await this.afAuth.signOut();
-    return this.router.navigate(['/home']);
+    return this.router.navigate(['']);
   }
 
   private updateUserData(user): any {
