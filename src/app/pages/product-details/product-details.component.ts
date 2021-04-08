@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {AuthService} from '../../services/auth.service';
 import {User} from '../../models/user';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +21,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toastr: ToastrService
   ) {
     this.auth.user$.subscribe(user => {
       this.user = user;
@@ -45,7 +46,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
-
+    if (this.user) {
+      this.productService.addToCart(this.id, this.quantity, this.user.id);
+      this.toastr.success('Product to cart');
+    }
   }
 
 }

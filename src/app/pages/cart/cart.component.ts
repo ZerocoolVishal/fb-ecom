@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {ProductService} from '../../services/product.service';
+import {User} from '../../models/user';
+import {AuthService} from '../../services/auth.service';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +12,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  products: any;
+  subTotal = 0;
+  delivery = 0;
+  total = 0;
 
-  ngOnInit(): void {
+  constructor(
+    private auth: AuthService,
+    private productService: ProductService
+  ) {
+    this.auth.user$.subscribe(user => {
+      this.user = user;
+      if (this.user) {
+        this.productService.initCart(this.user.id);
+        this.getCart();
+      }
+    });
   }
 
+  ngOnInit(): void { }
+
+  private getCart(): void {
+    this.productService.cart.subscribe((cart) => {
+      this.productService.getProducts().pipe(take(1)).subscribe(allProducts => {
+        this.subTotal = 0;
+        this.products = allProducts.filter(p => cart[p.id]).map(product => {
+          this.subTotal += (+product.price * cart[product.id]);
+          return { ...product, count: cart[product.id] };
+        });
+        this.total = this.subTotal + this.delivery;
+      });
+    });
+  }
+
+  addQuantity(id): void {
+    console.log('addQuantity');
+    this.productService.addToCart(id, 1, this.user.id);
+  }
+
+  removeQuantity(id): void {
+    console.log('removeQuantity');
+    this.productService.removeFrom(id, 1, this.user.id);
+  }
 }
